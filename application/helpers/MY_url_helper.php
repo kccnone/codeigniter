@@ -154,4 +154,44 @@ function ReStrLen($str, $len=10, $etc='...')
     
         return $restr;
     }
+
+/**判断单页面有无内容**/
+if(!function_exists('InfoNo')){
+  function InfoNo($content=""){
+    if($content!=""){
+      $contstr = $content;
+    }else{
+      $contstr = '<div class="noinfo" style="text-align:center;">网站资料更新中...</div>';
+    }
+    return $contstr;  
+  }
+}
+
+/**判断有无图片--IMG**/
+if(!function_exists('InfoimgNo')){
+  function InfoimgNo($picurl="",$noimg="noimg.png"){
+    if($picurl!=""){
+      $str = uploadimages_url($picurl);
+      $contstr = '<img src="'.$str.'" width="100%" />';
+    }else{
+      $str = images_url($noimg);
+      $contstr = '<img src="'.$str.'" width="100%" />';
+    }
+    return $contstr;
+  }
+}
+
+/**判断有无图片--平铺**/
+if(!function_exists('InfoimgppNo')){
+  function InfoimgppNo($picurl="",$noimg="noimg.png"){
+    if($picurl!=""){
+      $str = uploadimages_url($picurl);
+      $contstr = $str;
+    }else{
+      $str = images_url($noimg);
+      $contstr = $str;
+    }
+    return $contstr;
+  }
+}
 ?>
