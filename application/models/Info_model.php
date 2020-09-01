@@ -20,28 +20,33 @@ class Info_model extends CI_Model{
 		return $this->db->query($str);
 	}
 
-	public function getconfig($varname=""){
+	public function getconfig($varname="")
+    {
 		$tablename = $this->db->dbprefix("webconfig");
-		if(""==$varname){
-	        $sql = "SELECT * FROM $tablename";
+		if(""==$varname)
+        {
+	        $sql = "SELECT varname,varvalue FROM $tablename";
 	        $query = $this->db->query( $sql);
 	        $result = $query->result_array();
-	        foreach ($result as $row) {
+	        foreach ($result as $row)
+            {
 	        	$webconfig[$row['varname']] = $row['varvalue'];
 	        }
 	        return $webconfig; 	
 		}
-		else{
-	        $sql = "SELECT * FROM $tablename WHERE varname = '".$varname."'";
+		else
+        {
+	        $sql = "SELECT varvalue FROM $tablename WHERE varname = '".$varname."'";
 	        $query = $this->db->query( $sql);
 	        $row = $query->row_array();
-	        $row['varvalue'];
+	        return $row['varvalue'];
 		}
 	}
 	
 	//中文版header标题、SEO内容
-	public function getheader($cid="",$id=""){
-		$t = array('0'=>'info','1'=>'infolist','2'=>'infoimg','3'=>'soft','4'=>'goods','5'=>'vedio','6'=>'spring','7'=>'summer','8'=>'autumn','9'=>'winter');
+	public function getheader($cid="",$id="")
+    {
+		$t = array('0'=>'info','1'=>'infolist','2'=>'infoimg','3'=>'soft','4'=>'goods','5'=>'vedio','6'=>'spring','7'=>'summer','8'=>'autumn','9'=>'winter','10'=>'east','11'=>'west','12'=>'north','13'=>'south','14'=>'friendship');
         $webconfig = $this->getconfig(); 
         $cfg_webname = $webconfig['cfg_webname']; 
         $cfg_generator = $webconfig['cfg_generator']; 
@@ -151,8 +156,9 @@ class Info_model extends CI_Model{
 	}
 
 	//英文版header标题、SEO内容
-	public function engetheader($cid="",$id=""){
-		$t = array('0'=>'info','1'=>'infolist','2'=>'infoimg','3'=>'soft','4'=>'goods','5'=>'vedio','6'=>'spring','7'=>'summer','8'=>'autumn','9'=>'winter');
+	public function engetheader($cid="",$id="")
+    {
+		$t = array('0'=>'info','1'=>'infolist','2'=>'infoimg','3'=>'soft','4'=>'goods','5'=>'vedio','6'=>'spring','7'=>'summer','8'=>'autumn','9'=>'winter','10'=>'east','11'=>'west','12'=>'north','13'=>'south','14'=>'friendship');
         $webconfig = $this->getconfig(); 
         $cfg_webname = $webconfig['cfg_webnameen']; 
         $cfg_generator = $webconfig['cfg_generator']; 
@@ -175,8 +181,8 @@ class Info_model extends CI_Model{
 				$r2 = $query->row_array();
 
 				$header_str = '<title>';
-				if(isset($r2['enname'])){
-					$header_str .= $r2['enname'];			
+				if(isset($r2['classname_en'])){
+					$header_str .= $r2['classname_en'];
 				}
 				else{
 					$header_str .= $cfg_webname;
@@ -225,8 +231,8 @@ class Info_model extends CI_Model{
 			$header_str = '<title>';
 			if(!empty($r['seotitle']))
 				$header_str .= $r['seotitle'];
-			else if(!empty($r['enname']))
-				$header_str .= $r['enname'].' - '.$cfg_webname;
+			else if(!empty($r['classname_en']))
+				$header_str .= $r['classname_en'].' - '.$cfg_webname;
 			else
 				$header_str .= $cfg_webname;
 			$header_str .= '</title>'."\n";
