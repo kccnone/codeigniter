@@ -70,7 +70,7 @@ class Info_model extends CI_Model{
 
 				$header_str = '<title>';
 				if(isset($r2['title'])){
-					$header_str .= $r2['title'];			
+					$header_str .= $r2['title'].'-'.$cfg_webname;
 				}
 				else{
 					$header_str .= $cfg_webname;
@@ -81,8 +81,8 @@ class Info_model extends CI_Model{
 				$header_str .= '<meta name="author" content="'.$cfg_author.'" />'."\n";
 
 				$header_str .= '<meta name="keywords" content="';
-				if(isset($r2['keywords'])){
-					$header_str .= $r2['keywords'];
+				if(isset($r['keywords'])){
+					$header_str .= $r['keywords'];
 				}
 				else{
 					$header_str .= $cfg_keyword;
@@ -90,8 +90,8 @@ class Info_model extends CI_Model{
 				$header_str .= '" />'."\n";
 
 				$header_str .= '<meta name="description" content="';
-				if(isset($r2['description'])){
-					$header_str .= $r2['description'];
+				if(isset($r['description'])){
+					$header_str .= $r['description'];
 				}
 				else{
 					$header_str .= $cfg_description;
